@@ -1,6 +1,6 @@
 -- Creating the Society table
 CREATE TABLE society (
-    society_id VARCHAR(36) PRIMARY KEY,
+    society_id int PRIMARY KEY,
     society_name VARCHAR(100) NOT NULL,
     society_address VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -9,7 +9,7 @@ CREATE TABLE society (
 
 -- Creating the Chef table with the new constraints
 CREATE TABLE chef (
-    chef_id VARCHAR(36) PRIMARY KEY,
+    chef_id int PRIMARY KEY,
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     first_name VARCHAR(100) NOT NULL,
@@ -18,7 +18,7 @@ CREATE TABLE chef (
     specialities VARCHAR(255),
     payment_upi_no BIGINT,
     payment_upi_id VARCHAR(100),
-    society_id VARCHAR(36) NOT NULL,
+    society_id int NOT NULL,
     is_open BOOLEAN NOT NULL DEFAULT FALSE,
     auto_close_time TIME,
     allows_pickup BOOLEAN DEFAULT TRUE,
@@ -31,7 +31,7 @@ CREATE TABLE chef (
 
 -- Creating the Customer table with the new constraints
 CREATE TABLE customer (
-    customer_id VARCHAR(36) PRIMARY KEY,
+    customer_id int PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
@@ -42,8 +42,8 @@ CREATE TABLE customer (
 );
 
 CREATE TABLE customer_address (
-    address_id VARCHAR(36) PRIMARY KEY,
-    customer_id VARCHAR(36) NOT NULL,
+    address_id int PRIMARY KEY,
+    customer_id int NOT NULL,
     address VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -52,8 +52,8 @@ CREATE TABLE customer_address (
 
 -- Creating the Items table with the new constraint on chef_id
 CREATE TABLE items (
-    item_id VARCHAR(36) PRIMARY KEY,
-    chef_id VARCHAR(36) NOT NULL,
+    item_id int PRIMARY KEY,
+    chef_id int NOT NULL,
     item_name VARCHAR(100) NOT NULL,
     item_description VARCHAR(255),
     item_price INT NOT NULL,
@@ -66,9 +66,9 @@ CREATE TABLE items (
 
 -- Creating the Cart table with new constraints
 CREATE TABLE cart (
-    cart_id VARCHAR(36) PRIMARY KEY,
-    customer_id VARCHAR(36) NOT NULL,
-    item_id VARCHAR(36) NOT NULL,
+    cart_id int PRIMARY KEY,
+    customer_id int NOT NULL,
+    item_id int NOT NULL,
     quantity INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -78,10 +78,10 @@ CREATE TABLE cart (
 
 -- Creating the Orders table with new constraints
 CREATE TABLE orders (
-    order_id VARCHAR(36) PRIMARY KEY,
-    customer_id VARCHAR(36) NOT NULL,
-    chef_id VARCHAR(36) NOT NULL,
-    customer_address_id VARCHAR(36) NOT NULL,
+    order_id int PRIMARY KEY,
+    customer_id int NOT NULL,
+    chef_id int NOT NULL,
+    customer_address_id int NOT NULL,
     order_time DATETIME NOT NULL,
     order_status VARCHAR(30) NOT NULL,
     is_pickup BOOLEAN NOT NULL DEFAULT FALSE,
@@ -97,8 +97,8 @@ CREATE TABLE orders (
 
 -- Creating the Order_Items table with a composite primary key
 CREATE TABLE order_items (
-    order_id VARCHAR(36) NOT NULL,
-    item_id VARCHAR(36) NOT NULL,
+    order_id int NOT NULL,
+    item_id int NOT NULL,
     quantity INT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
