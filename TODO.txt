@@ -5,3 +5,4 @@
 5. the entity have default values set, this is not the right way, instead have the default values set at request level. (think about it)
 6. For cart we don't need a separate card it, we can directly use the customer id. Also each customer can have a item added only once.
 7. Order_id and item_id pair should be unique.
+8. Security has been commented in the pom file.

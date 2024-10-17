@@ -1,15 +1,20 @@
+CREATE DATABASE home_chef;
+
+USE home_chef;
+
 -- Creating the Society table
 CREATE TABLE society (
-    society_id int PRIMARY KEY,
+    society_id int AUTO_INCREMENT PRIMARY KEY,
     society_name VARCHAR(100) NOT NULL,
     society_address VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE (society_name, society_address)
 );
 
 -- Creating the Chef table with the new constraints
 CREATE TABLE chef (
-    chef_id int PRIMARY KEY,
+    chef_id int AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     first_name VARCHAR(100) NOT NULL,
@@ -31,7 +36,7 @@ CREATE TABLE chef (
 
 -- Creating the Customer table with the new constraints
 CREATE TABLE customer (
-    customer_id int PRIMARY KEY,
+    customer_id int AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE,
@@ -42,7 +47,7 @@ CREATE TABLE customer (
 );
 
 CREATE TABLE customer_address (
-    address_id int PRIMARY KEY,
+    address_id int AUTO_INCREMENT PRIMARY KEY,
     customer_id int NOT NULL,
     address VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -52,7 +57,7 @@ CREATE TABLE customer_address (
 
 -- Creating the Items table with the new constraint on chef_id
 CREATE TABLE items (
-    item_id int PRIMARY KEY,
+    item_id int AUTO_INCREMENT PRIMARY KEY,
     chef_id int NOT NULL,
     item_name VARCHAR(100) NOT NULL,
     item_description VARCHAR(255),
@@ -66,7 +71,7 @@ CREATE TABLE items (
 
 -- Creating the Cart table with new constraints
 CREATE TABLE cart (
-    cart_id int PRIMARY KEY,
+    cart_id int AUTO_INCREMENT PRIMARY KEY,
     customer_id int NOT NULL,
     item_id int NOT NULL,
     quantity INT NOT NULL,
@@ -78,7 +83,7 @@ CREATE TABLE cart (
 
 -- Creating the Orders table with new constraints
 CREATE TABLE orders (
-    order_id int PRIMARY KEY,
+    order_id int AUTO_INCREMENT PRIMARY KEY,
     customer_id int NOT NULL,
     chef_id int NOT NULL,
     customer_address_id int NOT NULL,

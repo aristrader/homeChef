@@ -1,6 +1,12 @@
 package com.foodDelivery.homeChef.jpa.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -10,7 +16,9 @@ import org.hibernate.annotations.UpdateTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "society")
+@Table(name = "society", uniqueConstraints = {
+        @UniqueConstraint(columnNames = {"society_name", "address"}) // Unique constraint on societyName and address
+})
 @Data
 public class SocietyEntity {
 
